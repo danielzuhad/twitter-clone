@@ -5,6 +5,10 @@ import axios from "axios";
 
 import { AuthInput } from "./components/LoginInput";
 import { LoginButton } from "./components/LoginButton";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setLogin } from "../../redux/authSLice";
 
 const API = import.meta.env.VITE_API;
 
@@ -18,20 +22,44 @@ export default function Login() {
   const [password, setPassword] = useState<string>("");
   const [picturePath, setPicturePath] = useState<string>("");
 
+  // Navigate Other Link
+  const navigate = useNavigate();
+
+  // Dispatch Redux
+  const dispatch = useDispatch();
+
   // Register Api
   async function handleRegister() {
     try {
       setIsLoading(true);
+      if (
+        firstName === "" ||
+        lastName === "" ||
+        email === "" ||
+        password === "" ||
+        picturePath === ""
+      ) {
+        toast.error("Harap Isi Semua");
+      } else {
+        const data = {
+          firstName,
+          lastName,
+          email,
+          password,
+          picturePath,
+        };
 
-      const data = {
-        firstName,
-        lastName,
-        email,
-        password,
-        picturePath,
-      };
+        const response = await axios.post(`${API}/auth/register`, data);
+        console.log("Register Succesfull", response.data);
 
-      setAuthType("Login");
+        setFirstName("");
+        setLastName("");
+        setPicturePath("");
+        setEmail("");
+        setPassword("");
+        toast.success("Register Berhasil, Harap Login");
+        setAuthType("Login");
+      }
     } catch (error) {
       console.error(error);
     } finally {
@@ -40,12 +68,37 @@ export default function Login() {
   }
 
   // Login Api
-  function handleLogin() {
-    console.log(firstName);
-    console.log(lastName);
-    console.log(email);
-    console.log(password);
-    console.log(picturePath);
+  async function handleLogin() {
+    try {
+      setIsLoading(true);
+      if (email === "" || password === "") {
+        toast.error("Harap Isi Semua");
+      } else {
+        const data = {
+          email,
+          password,
+        };
+
+        const response = await axios.post(`${API}/auth/login`, data);
+        console.log("Login Succesfull", response.data);
+
+        if (response.status === 200) {
+          dispatch(
+            setLogin({
+              user: response.data.user,
+              token: response.data.token,
+            })
+          );
+        }
+
+        toast.success("Login Berhasil");
+        navigate("/home");
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   // React Drop Zone
@@ -81,7 +134,7 @@ export default function Login() {
           <h2 className="text-center text-[1.5em] font-semibold">
             {authType === "Register" ? "Sign Up" : "Sign In"}
           </h2>
-          {/* Register (Sign Up) */}
+          {/* Login (Sign In) */}
           <AuthInput
             label="Email"
             value={email}

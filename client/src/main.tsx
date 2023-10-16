@@ -8,12 +8,14 @@ import { store } from "./redux/store.ts";
 import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
+import ToasterContext from "./context/ToastContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistStore(store)}>
         <BrowserRouter>
+          <ToasterContext />
           <App />
         </BrowserRouter>
       </PersistGate>
