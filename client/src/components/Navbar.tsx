@@ -2,7 +2,11 @@ import { useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 
-export const Navbar = () => {
+interface NavbarProps {
+  className?: string;
+}
+
+export const Navbar = ({ className }: NavbarProps) => {
   const [mobileView, setmobileView] = useState(false);
 
   const navbarItem = [
@@ -10,5 +14,5 @@ export const Navbar = () => {
     { ProfileIcon: CgProfile, title: "Profile" },
   ];
 
-  return <div>Navbar</div>;
+  return <div className={className}>Navbar</div>;
 };
