@@ -80,7 +80,6 @@ export default function Login() {
         };
 
         const response = await axios.post(`${API}/auth/login`, data);
-        console.log("Login Succesfull", response.data);
 
         if (response.status === 200) {
           dispatch(
@@ -89,15 +88,41 @@ export default function Login() {
               token: response.data.token,
             })
           );
-        }
 
-        toast.success("Login Berhasil");
-        navigate("/home");
+          toast.success("Login Berhasil");
+          navigate("/home");
+        } else {
+          // Handle other status codes or errors here
+          toast.error(
+            "Terjadi kesalahan saat melakukan login. Silakan coba lagi."
+          );
+        }
       }
     } catch (error) {
-      console.error(error);
+      setIsLoading(false);
+
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          if (error.response.data.message === "User Dont Exist") {
+            toast.error(
+              "Pengguna tidak ditemukan. Silakan daftar terlebih dahulu."
+            );
+          } else {
+            toast.error(
+              "Terjadi kesalahan saat melakukan login. Silakan coba lagi."
+            );
+          }
+        } else {
+          toast.error(
+            "Tidak ada respons dari server. Silakan coba lagi nanti."
+          );
+        }
+      } else {
+        toast.error("Terjadi kesalahan. Silakan coba lagi.");
+      }
     } finally {
       setIsLoading(false);
+      setPassword("");
     }
   }
 
