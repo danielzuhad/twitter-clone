@@ -1,18 +1,19 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import clsx from "clsx";
 import axios from "axios";
 
-import { AuthInput } from "./components/LoginInput";
-import { LoginButton } from "./components/LoginButton";
+import { AuthInput } from "./components/AuthInput";
+import { LoginButton } from "./components/AuthButton";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLogin } from "../../redux/authSLice";
+import { RootState } from "../../redux/store";
 
 const API = import.meta.env.VITE_API;
 
-export default function Login() {
+export default function Auth() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [authType, setAuthType] = useState<"Login" | "Register">("Register");
 
@@ -25,8 +26,9 @@ export default function Login() {
   // Navigate Other Link
   const navigate = useNavigate();
 
-  // Dispatch Redux
+  //  Redux
   const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user);
 
   // Register Api
   async function handleRegister() {
@@ -132,17 +134,22 @@ export default function Login() {
     const fileURL = URL.createObjectURL(file);
     setPicturePath(fileURL);
   }, []);
-
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   // Auth Toggle
-  function handleAuthTypeToggle() {
+  const handleAuthTypeToggle = useCallback(() => {
     if (authType === "Register") {
       setAuthType("Login");
     } else {
       setAuthType("Register");
     }
-  }
+  }, [authType]);
+
+  useEffect(() => {
+    if (user) {
+      navigate("/home");
+    }
+  }, [navigate, user]);
 
   return (
     <>

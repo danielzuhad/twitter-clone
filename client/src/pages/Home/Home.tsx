@@ -7,9 +7,6 @@ import { Footer } from "../../components/Footer";
 
 export default function Home() {
   const [mobileMenu, setMobileMenu] = useState(window.innerWidth <= 639);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const user = useSelector((state: RootState) => state.user);
 
   const handleResize = useCallback(() => {
     setMobileMenu(window.innerWidth <= 639);
