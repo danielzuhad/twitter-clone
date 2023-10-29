@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { RootState } from "../../redux/store";
 import { Footer } from "../../components/Footer";
+import { cn } from "../../utils/cn";
 
 export default function Home() {
-  const [mobileMenu, setMobileMenu] = useState(window.innerWidth <= 639);
+  const [mobileMenu, setMobileMenu] = useState(window.innerWidth <= 768);
 
   const handleResize = useCallback(() => {
-    setMobileMenu(window.innerWidth <= 639);
+    setMobileMenu(window.innerWidth <= 768);
   }, []);
 
   useEffect(() => {
@@ -21,13 +22,22 @@ export default function Home() {
 
   return (
     <>
-      <div className="w-[85vw] grid sm:grid-cols-3 ">
-        <Navbar className="bg-red-600 max-sm:h-10" />
-        <div className=" h-[95vh] sm:col-start-2 sm:col-span-2 relative">
+      <main
+        className={cn(
+          "max-w-[75em] w-[95vw] h-[100vh] ",
+          !mobileMenu && "flex flex-row"
+        )}
+      >
+        <Navbar variant={mobileMenu ? "Header" : "Side"} />
+        <div
+          className={cn(
+            "min-w-[50em] border-x-2 border-[#707070] p-4 rounded-sm"
+          )}
+        >
           home
-          {mobileMenu && <Footer className="absolute bottom-0 w-full" />}
+          {mobileMenu && <Footer className="fixed bottom-0 w-full" />}
         </div>
-      </div>
+      </main>
     </>
   );
 }
