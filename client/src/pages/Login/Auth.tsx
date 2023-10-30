@@ -2,12 +2,12 @@ import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import clsx from "clsx";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 import { AuthInput } from "./components/AuthInput";
-import { LoginButton } from "./components/AuthButton";
-import toast from "react-hot-toast";
+import { AuthButton } from "./components/AuthButton";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { setLogin } from "../../redux/authSLice";
 import { RootState } from "../../redux/store";
 
@@ -241,13 +241,13 @@ export default function Auth() {
           </div>
 
           {authType === "Register" ? (
-            <LoginButton onClick={handleRegister} disabled={isLoading}>
+            <AuthButton onClick={handleRegister} disabled={isLoading}>
               {authType}
-            </LoginButton>
+            </AuthButton>
           ) : (
-            <LoginButton onClick={handleLogin} disabled={isLoading}>
+            <AuthButton onClick={handleLogin} disabled={isLoading}>
               {authType}
-            </LoginButton>
+            </AuthButton>
           )}
         </div>
       </div>

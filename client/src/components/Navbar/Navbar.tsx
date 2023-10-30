@@ -2,7 +2,8 @@ import { useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import { AiOutlineSearch } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
+import { NavProfile } from "./NavProfile";
 
 interface NavbarProps {
   className?: string;
@@ -27,7 +28,9 @@ export const Navbar = ({ className, variant }: NavbarProps) => {
   const side = () => {
     return (
       <>
-        <h1>side</h1>
+        <div>
+          <NavProfile />
+        </div>
       </>
     );
   };

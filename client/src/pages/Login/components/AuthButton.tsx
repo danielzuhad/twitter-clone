@@ -1,12 +1,12 @@
 import clsx from "clsx";
 
-interface LoginButtonProps {
+interface AuthButtonProps {
   children?: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
 }
 
-export const LoginButton: React.FC<LoginButtonProps> = ({
+export const AuthButton: React.FC<AuthButtonProps> = ({
   children,
   onClick,
   disabled,
@@ -14,6 +14,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
   return (
     <>
       <button
+        type="submit"
         onClick={onClick}
         className={clsx(
           `w-full bg-black text-white p-2 rounded-md mt-4 hover:bg-gray-800`,

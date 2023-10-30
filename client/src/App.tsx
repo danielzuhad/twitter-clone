@@ -10,12 +10,12 @@ function App() {
   const user = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (!user) {
-  //     navigate("/");
-  //   }
-  //   console.log("render");
-  // }, [user]);
+  useEffect(() => {
+    if (!user) {
+      navigate("/");
+    }
+    console.log("render");
+  }, [user, navigate]);
 
   return (
     <>
