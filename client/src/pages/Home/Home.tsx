@@ -24,14 +24,15 @@ export default function Home() {
     <>
       <main
         className={cn(
-          "max-w-[75em] w-[95vw] h-[100vh] ",
+          "max-w-[70em] w-[95vw] h-[100vh] ",
           !mobileMenu && "flex flex-row"
         )}
       >
         <Navbar variant={mobileMenu ? "Header" : "Side"} />
         <div
           className={cn(
-            "min-w-[50em] border-x-2 border-[#707070] p-4 rounded-sm"
+            " border-2 border-[#707070] p-4 rounded-sm",
+            mobileMenu ? "w-[95vw]" : "w-[100em]"
           )}
         >
           home

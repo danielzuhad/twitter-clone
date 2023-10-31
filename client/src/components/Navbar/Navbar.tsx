@@ -28,7 +28,7 @@ export const Navbar = ({ className, variant }: NavbarProps) => {
   const side = () => {
     return (
       <>
-        <div>
+        <div className="">
           <NavProfile />
         </div>
       </>
