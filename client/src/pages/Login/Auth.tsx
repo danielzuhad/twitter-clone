@@ -5,8 +5,8 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 
-import { AuthInput } from "./components/AuthInput";
-import { AuthButton } from "./components/AuthButton";
+import { AuthInput } from "../../components/Login/AuthInput";
+import { AuthButton } from "../../components/Login/AuthButton";
 import { useNavigate } from "react-router-dom";
 import { setLogin } from "../../redux/authSLice";
 import { RootState } from "../../redux/store";

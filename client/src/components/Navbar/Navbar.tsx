@@ -4,6 +4,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { cn } from "../../utils/cn";
 import { NavProfile } from "./NavProfile";
+import { NavHeader } from "./NavHeader";
 
 interface NavbarProps {
   className?: string;
@@ -17,28 +18,15 @@ export const Navbar = ({ className, variant }: NavbarProps) => {
     { ProfileIcon: AiOutlineSearch, title: "Search" },
   ];
 
-  const header = () => {
-    return (
-      <>
-        <h1>header</h1>
-      </>
-    );
-  };
-
-  const side = () => {
-    return (
-      <>
-        <div className="">
-          <NavProfile />
-        </div>
-      </>
-    );
-  };
-
   return (
     <>
-      <div className={cn(" w-full ", className)}>
-        {variant === "Side" ? side() : header()}
+      <div
+        className={cn(
+          " w-full md:max-lg:max-w-max p-3 flex flex-col items-end ",
+          className
+        )}
+      >
+        {variant === "Side" ? <NavProfile /> : <NavHeader />}
       </div>
     </>
   );
