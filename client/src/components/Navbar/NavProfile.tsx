@@ -1,13 +1,22 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, ReactElement } from "react";
 
 import { cn } from "../../utils/cn";
 import foto from "../../assets/foto.jpeg";
+import { Link, LinkProps } from "react-router-dom";
+
+type NavbarItem = {
+  Homeicon?: ReactElement;
+  ProfileIcon?: ReactElement;
+  title: string;
+  link: string;
+};
 
 type Props = {
   className?: string;
+  navbarItem?: NavbarItem[];
 };
 
-export const NavProfile = ({ className }: Props) => {
+export const NavProfile = ({ className, navbarItem }: Props) => {
   const [mobileMenu, setMobileMenu] = useState(window.innerWidth <= 1023);
 
   const handleResize = useCallback(() => {
@@ -39,7 +48,7 @@ export const NavProfile = ({ className }: Props) => {
         {/* Data diri */}
         <div>
           <div>
-            <h3 className="font-bold text-[2em] w-max">Mr. Zuhad </h3>
+            <h3 className="font-bold text-[2em] w-max"> Zuhad </h3>
             <p className="mt-[-5px]">danielzuhad@mail.com</p>
 
             <h4 className="font-semibold text-[1.2em] mt-2">10 Friend</h4>
@@ -47,7 +56,14 @@ export const NavProfile = ({ className }: Props) => {
         </div>
       </div>
 
-      <div>test</div>
+      <div className="mt-10">
+        {navbarItem?.map((item, index) => (
+          <div className="flex" key={index}>
+            <Link to={item.link}>{item.Homeicon || item.ProfileIcon}</Link>
+            <div>{item.title}</div>
+          </div>
+        ))}
+      </div>
     </>
   );
 };

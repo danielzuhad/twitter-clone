@@ -13,9 +13,8 @@ interface NavbarProps {
 
 export const Navbar = ({ className, variant }: NavbarProps) => {
   const navbarItem = [
-    { Homeicon: AiOutlineHome, title: "Home" },
-    { ProfileIcon: CgProfile, title: "Profile" },
-    { ProfileIcon: AiOutlineSearch, title: "Search" },
+    { Homeicon: <AiOutlineHome />, title: "Home", link: "/home" },
+    { ProfileIcon: <CgProfile />, title: "Profile", link: "/profile" },
   ];
 
   return (
@@ -26,7 +25,11 @@ export const Navbar = ({ className, variant }: NavbarProps) => {
           className
         )}
       >
-        {variant === "Side" ? <NavProfile /> : <NavHeader />}
+        {variant === "Side" ? (
+          <NavProfile navbarItem={navbarItem} />
+        ) : (
+          <NavHeader />
+        )}
       </div>
     </>
   );
