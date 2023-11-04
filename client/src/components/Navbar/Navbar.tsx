@@ -3,7 +3,7 @@ import { AiOutlineHome } from "react-icons/ai";
 import { AiOutlineSearch } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { cn } from "../../utils/cn";
-import { NavProfile } from "./NavProfile";
+import { NavSide } from "./NavSide";
 import { NavHeader } from "./NavHeader";
 
 interface NavbarProps {
@@ -19,14 +19,9 @@ export const Navbar = ({ className, variant }: NavbarProps) => {
 
   return (
     <>
-      <div
-        className={cn(
-          " w-full md:max-lg:max-w-max p-3 flex flex-col items-end ",
-          className
-        )}
-      >
+      <div className={cn(" w-full p-3 flex flex-col items-end ", className)}>
         {variant === "Side" ? (
-          <NavProfile navbarItem={navbarItem} />
+          <NavSide navbarItem={navbarItem} />
         ) : (
           <NavHeader />
         )}

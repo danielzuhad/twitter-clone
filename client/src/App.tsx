@@ -8,17 +8,16 @@ import Auth from "./pages/Login/Auth.tsx";
 import ProfileById from "./pages/Profile/ProfileById.tsx";
 import { RootState } from "./redux/store.ts";
 import { Navbar } from "./components/Navbar/Navbar.tsx";
-import { Footer } from "./components/Footer.tsx";
 import { cn } from "./utils/cn.ts";
 
 function App() {
-  const [mobileMenu, setMobileMenu] = useState(window.innerWidth <= 768);
+  const [mobileMenu, setMobileMenu] = useState(window.innerWidth <= 813);
 
   const user = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
 
   const handleResize = useCallback(() => {
-    setMobileMenu(window.innerWidth <= 768);
+    setMobileMenu(window.innerWidth <= 813);
   }, []);
 
   useEffect(() => {
@@ -37,9 +36,9 @@ function App() {
 
   return (
     <>
-      <div className={cn("flex", mobileMenu && "flex-col")}>
+      <div className={cn("flex relative", mobileMenu && "flex-col")}>
         <Navbar variant={mobileMenu ? "Header" : "Side"} />
-        <div>
+        <div className={mobileMenu ? "mt-[5em]" : ""}>
           <Routes>
             <Route path="/" element={<Auth />} />
             <Route path="/home" element={<Home mobileMenu={mobileMenu} />} />
@@ -47,7 +46,6 @@ function App() {
             <Route path="/profile/:id" element={<ProfileById />} />
           </Routes>
         </div>
-        {mobileMenu && <Footer className="fixed bottom-0 w-full" />}
       </div>
     </>
   );

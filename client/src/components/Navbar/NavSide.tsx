@@ -16,7 +16,7 @@ type Props = {
   navbarItem?: NavbarItem[];
 };
 
-export const NavProfile = ({ className, navbarItem }: Props) => {
+export const NavSide = ({ className, navbarItem }: Props) => {
   const [mobileMenu, setMobileMenu] = useState(window.innerWidth <= 1023);
 
   const handleResize = useCallback(() => {
@@ -33,7 +33,7 @@ export const NavProfile = ({ className, navbarItem }: Props) => {
     <>
       <div
         className={cn(
-          " max-w-[22em] w-full  border-2  border-black rounded-md flex gap-3 py-5 px-2 justify-center items-center",
+          "  w-full   border-2  border-black rounded-md flex gap-3 py-5 px-2 justify-center items-center",
           mobileMenu && "hidden",
           className
         )}
@@ -56,11 +56,21 @@ export const NavProfile = ({ className, navbarItem }: Props) => {
         </div>
       </div>
 
-      <div className="mt-10">
+      <div
+        className={cn(
+          "flex flex-col gap-5 ",
+          mobileMenu ? "mt-2 " : "mt-10 w-full"
+        )}
+      >
         {navbarItem?.map((item, index) => (
-          <div className="flex" key={index}>
-            <Link to={item.link}>{item.Homeicon || item.ProfileIcon}</Link>
-            <div>{item.title}</div>
+          <div
+            className="flex items-center p-2 gap-3 border-2 border-black rounded-md"
+            key={index}
+          >
+            <Link className="text-[2em] " to={item.link}>
+              {item.Homeicon || item.ProfileIcon}
+            </Link>
+            <div className={mobileMenu ? "hidden" : ""}>{item.title}</div>
           </div>
         ))}
       </div>
