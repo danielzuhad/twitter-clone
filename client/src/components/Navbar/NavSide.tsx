@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useCallback, ReactElement } from "react";
+import React, { ReactElement } from "react";
 
 import { cn } from "../../utils/cn";
 import foto from "../../assets/foto.jpeg";
-import { Link, LinkProps } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { NavSideItem } from "./NavSideItem";
 
-type NavbarItem = {
+export type NavbarItem = {
   Homeicon?: ReactElement;
   ProfileIcon?: ReactElement;
   title: string;
@@ -17,30 +18,18 @@ type Props = {
 };
 
 export const NavSide = ({ className, navbarItem }: Props) => {
-  const [mobileMenu, setMobileMenu] = useState(window.innerWidth <= 1023);
-
-  const handleResize = useCallback(() => {
-    setMobileMenu(window.innerWidth <= 1023);
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [handleResize]);
   return (
     <>
       <div
         className={cn(
-          "  w-full   border-2  border-black rounded-md flex gap-3 py-5 px-2 justify-center items-center",
-          mobileMenu && "hidden",
+          "w-full  border-2  border-black rounded-md flex gap-3 py-5 px-2 justify-center items-center shadow-md sm:max-lg:hidden",
+
           className
         )}
       >
         {/* Foto */}
         <img
-          className="min-w-[7em] h-[7em] object-cover rounded-full"
+          className="min-w-[7em] h-[7em] object-cover rounded-full "
           src={foto}
           alt=""
         />
@@ -56,23 +45,25 @@ export const NavSide = ({ className, navbarItem }: Props) => {
         </div>
       </div>
 
+      {/* Navbar Menu */}
       <div
         className={cn(
-          "flex flex-col gap-5 ",
-          mobileMenu ? "mt-2 " : "mt-10 w-full"
+          "flex flex-col items-end gap-5 w-full max-w-[20em] md:mt-5 "
         )}
       >
         {navbarItem?.map((item, index) => (
-          <div
-            className="flex items-center p-2 gap-3 border-2 border-black rounded-md"
+          <NavSideItem
             key={index}
-          >
-            <Link className="text-[2em] " to={item.link}>
-              {item.Homeicon || item.ProfileIcon}
-            </Link>
-            <div className={mobileMenu ? "hidden" : ""}>{item.title}</div>
-          </div>
+            link={item.link}
+            title={item.title}
+            Homeicon={item.Homeicon}
+            ProfileIcon={item.ProfileIcon}
+          />
         ))}
+
+        <button className="w-full border-2 bg-black text-white rounded-md py-3 text-xl font-semibold mt-10 sm:max-lg:mt-0">
+          Post
+        </button>
       </div>
     </>
   );

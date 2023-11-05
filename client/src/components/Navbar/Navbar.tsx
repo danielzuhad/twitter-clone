@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
-import { AiOutlineSearch } from "react-icons/ai";
+import { LiaFeatherAltSolid } from "react-icons/lia";
 import { CgProfile } from "react-icons/cg";
 import { cn } from "../../utils/cn";
 import { NavSide } from "./NavSide";
