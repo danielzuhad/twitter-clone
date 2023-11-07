@@ -1,8 +1,7 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { cn } from "../../utils/cn";
 import foto from "../../assets/foto.jpeg";
-import { Link } from "react-router-dom";
 import { NavSideItem } from "./NavSideItem";
 
 export type NavbarItem = {
@@ -61,7 +60,7 @@ export const NavSide = ({ className, navbarItem }: Props) => {
           />
         ))}
 
-        <button className="w-full border-2 bg-black text-white rounded-md py-3 text-xl font-semibold mt-10 sm:max-lg:mt-0">
+        <button className="w-full border-2 bg-black text-white rounded-md py-3 text-xl font-semibold mt-10 sm:max-lg:mt-0 hover:shadow-lg hover:scale-105 transition-all">
           Post
         </button>
       </div>

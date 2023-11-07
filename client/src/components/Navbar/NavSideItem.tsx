@@ -19,7 +19,7 @@ export const NavSideItem = ({
       <Link
         to={link}
         className={cn(
-          "w-full flex items-center justify-center p-2 gap-3 border-2 shadow-md border-black rounded-md hover:shadow-lg hover:scale-105 sm:max-lg:px-4 ",
+          "w-full flex items-center justify-center p-2 gap-3 border-2 shadow-md border-black rounded-md hover:shadow-lg hover:scale-105 sm:max-lg:px-4 transition-all",
           className
         )}
       >

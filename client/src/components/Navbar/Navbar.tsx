@@ -1,6 +1,6 @@
 import { AiOutlineHome } from "react-icons/ai";
-import { LiaFeatherAltSolid } from "react-icons/lia";
 import { CgProfile } from "react-icons/cg";
+
 import { cn } from "../../utils/cn";
 import { NavSide } from "./NavSide";
 import { NavHeader } from "./NavHeader";
@@ -22,7 +22,7 @@ export const Navbar = ({ className, variant }: NavbarProps) => {
         {variant === "Side" ? (
           <NavSide navbarItem={navbarItem} />
         ) : (
-          <NavHeader />
+          <NavHeader navbarItem={navbarItem} />
         )}
       </div>
     </>
