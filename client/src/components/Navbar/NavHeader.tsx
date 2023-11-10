@@ -5,6 +5,7 @@ import { cn } from "../../utils/cn";
 import foto from "../../assets/foto.jpeg";
 import { NavSideItem } from "./NavSideItem";
 import { NavbarItem } from "./NavSide";
+import { PostButton } from "../PostButton";
 
 type Props = {
   className?: string;
@@ -28,7 +29,8 @@ export const NavHeader = ({ navbarItem, className }: Props) => {
     <>
       <div
         className={cn(
-          "w-[95vw] h-[7em] p-3 fixed md:left-[1.7%]  sm:left-[2.5%] left-[2.5%]  top-0 bg-white rounded-b-md  border-black  border-b-2  border-l-2  border-r-2 "
+          "w-[95vw] h-[7em] p-3 fixed md:left-[1.7%]  sm:left-[2.5%] left-[2.5%]  top-0 bg-white rounded-b-md  border-black  border-b-2  border-l-2  border-r-2 ",
+          className
         )}
       >
         <button onClick={handleOpenNavbar} className="">
@@ -73,6 +75,8 @@ export const NavHeader = ({ navbarItem, className }: Props) => {
               />
             </button>
           ))}
+
+          <PostButton />
         </div>
       </div>
     </>

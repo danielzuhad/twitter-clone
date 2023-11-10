@@ -1,31 +1,24 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Home from "./pages/Home/Home.tsx";
 import Profile from "./pages/Profile/Profile.tsx";
 import Auth from "./pages/Login/Auth.tsx";
 import ProfileById from "./pages/Profile/ProfileById.tsx";
-import { RootState } from "./redux/store.ts";
-import { Navbar } from "./components/Navbar/Navbar.tsx";
-import { cn } from "./utils/cn.ts";
+import { AuthState } from "./redux/authSLice.ts";
+import { setMobileMenu } from "./redux/mobileMenuSlice.tsx";
+import Layout from "./layout/Layout.tsx";
 
 function App() {
-  const [mobileMenu, setMobileMenu] = useState(window.innerWidth <= 813);
-
-  const user = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const user = useSelector((state: { auth: AuthState }) => state.auth.user);
 
   const handleResize = useCallback(() => {
-    setMobileMenu(window.innerWidth <= 813);
-  }, []);
-
-  useEffect(() => {
-    if (!user) {
-      navigate("/");
-    }
-    console.log("render");
-  }, [user, navigate]);
+    dispatch(setMobileMenu(window.innerWidth <= 813));
+  }, [dispatch]);
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -34,19 +27,24 @@ function App() {
     };
   }, [handleResize]);
 
+  useEffect(() => {
+    if (!user) {
+      navigate("/auth");
+    }
+  }, [navigate, user]);
+
+  console.log({ user });
+
   return (
     <>
-      <div className={cn("flex relative", mobileMenu && "flex-col")}>
-        <Navbar variant={mobileMenu ? "Header" : "Side"} />
-        <div className={mobileMenu ? "mt-[5em]" : ""}>
-          <Routes>
-            <Route path="/" element={<Auth />} />
-            <Route path="/home" element={<Home mobileMenu={mobileMenu} />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/profile/:id" element={<ProfileById />} />
-          </Routes>
-        </div>
-      </div>
+      <Routes>
+        <Route path="auth" element={<Auth />} />
+        <Route path="/" element={<Layout />}>
+          <Route path="home" element={<Home />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="profile/:id" element={<ProfileById />} />
+        </Route>
+      </Routes>
     </>
   );
 }

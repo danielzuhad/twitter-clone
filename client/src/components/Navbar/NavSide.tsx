@@ -3,6 +3,7 @@ import { ReactElement } from "react";
 import { cn } from "../../utils/cn";
 import foto from "../../assets/foto.jpeg";
 import { NavSideItem } from "./NavSideItem";
+import { PostButton } from "../PostButton";
 
 export type NavbarItem = {
   Homeicon?: ReactElement;
@@ -36,7 +37,10 @@ export const NavSide = ({ className, navbarItem }: Props) => {
         {/* Data diri */}
         <div>
           <div>
-            <h3 className="font-bold text-[2em] w-max"> Zuhad </h3>
+            <h3 className="font-bold text-[2em] max-w-[5em]  truncate">
+              {" "}
+              Zuhad test test tsest
+            </h3>
             <p className="mt-[-5px]">danielzuhad@mail.com</p>
 
             <h4 className="font-semibold text-[1.2em] mt-2">10 Friend</h4>
@@ -60,9 +64,7 @@ export const NavSide = ({ className, navbarItem }: Props) => {
           />
         ))}
 
-        <button className="w-full border-2 bg-black text-white rounded-md py-3 text-xl font-semibold mt-10 sm:max-lg:mt-0 hover:shadow-lg hover:scale-105 transition-all">
-          Post
-        </button>
+        <PostButton />
       </div>
     </>
   );

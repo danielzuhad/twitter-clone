@@ -8,8 +8,7 @@ import toast from "react-hot-toast";
 import { AuthInput } from "../../components/Login/AuthInput";
 import { AuthButton } from "../../components/Login/AuthButton";
 import { useNavigate } from "react-router-dom";
-import { setLogin } from "../../redux/authSLice";
-import { RootState } from "../../redux/store";
+import { AuthState, setLogin } from "../../redux/authSLice";
 
 const API = import.meta.env.VITE_API;
 
@@ -28,7 +27,7 @@ export default function Auth() {
 
   //  Redux
   const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.user);
+  const user = useSelector((state: { auth: AuthState }) => state.auth.user);
 
   // Register Api
   async function handleRegister() {

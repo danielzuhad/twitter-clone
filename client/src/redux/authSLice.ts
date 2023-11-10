@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PostType, UserType } from "../type";
 
-interface stateProps {
+export interface AuthState {
   user: UserType | null;
   token: string | null;
   posts: PostType[] | null;
 }
 
-const initialState: stateProps = {
+const initialState: AuthState = {
   user: null,
   token: null,
   posts: [],

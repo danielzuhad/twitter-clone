@@ -12,7 +12,7 @@ interface NavbarProps {
 
 export const Navbar = ({ className, variant }: NavbarProps) => {
   const navbarItem = [
-    { Homeicon: <AiOutlineHome />, title: "Home", link: "/home" },
+    { Homeicon: <AiOutlineHome />, title: "Home", link: "/" },
     { ProfileIcon: <CgProfile />, title: "Profile", link: "/profile" },
   ];
 
