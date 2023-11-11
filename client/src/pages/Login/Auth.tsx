@@ -144,6 +144,8 @@ export default function Auth() {
     }
   }, [authType]);
 
+  console.log(user);
+
   useEffect(() => {
     if (user) {
       navigate("/home");

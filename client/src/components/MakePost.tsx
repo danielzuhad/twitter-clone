@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useState } from "react";
 
 import { cn } from "../utils/cn";
 
@@ -7,12 +7,16 @@ type Props = {
 };
 
 export const MakePost = ({ className }: Props) => {
-  const textInput = useRef<HTMLInputElement>("" || null);
+  const [textInput, setTextInput] = useState<string>("");
 
-  console.log(textInput.current?.value);
+  const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = event.target;
 
-  useEffect(() => {}, [textInput]);
+    const rows = value.split("\n").length;
 
+    setTextInput(value);
+  };
+  // TODO complete the input
   return (
     <>
       <div
@@ -21,13 +25,14 @@ export const MakePost = ({ className }: Props) => {
           className
         )}
       >
-        <input
+        <textarea
           className="max-w-full p-3 border-b-2 focus:outline-none font-semibold text-[1.5em] resize overflow-hidden leading-3 block  min-h-[40px]"
           placeholder="Make Post here"
-          ref={textInput}
+          value={textInput}
+          onChange={handleInputChange}
         />
 
-        {/* Icon % Post Button */}
+        {/* Icon & Post Button */}
         <div>test</div>
       </div>
     </>
